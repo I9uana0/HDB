@@ -92,6 +92,7 @@ sendToBattleButton.onclick = () => {
 }
 
 
+
 getEnemyButton.onclick = () => {
     // Получаем героя оппонента с сервера
     fetch(`https://api-code.practicum-team.ru/heroes`)

@@ -16,6 +16,9 @@ class Hero {
 
         console.log(heroInfo);
     }
+    danceAbility() {
+        this.stats.str += Number(this.level / 2);
+    }
 }
 
 class Knight extends Hero {
@@ -23,18 +26,20 @@ class Knight extends Hero {
         super(name, level, healthPoints, stats);
         this.isHorseTango = isHorseTango; // Может танцевать танго на коне
         this.energy = energy; // Показатель уровня энергии героя
+        super.danceAbility();
     }
 
     displayHero() {
         super.displayHero();
         console.log(`Энергия ${this.energy}`)
-
         if (this.isHorseTango === 'true' || this.isHorseTango === true) {
             console.log('Этот герой может танцевать танго на коне');
+            console.log(`${this.name} увеличивает параметр str на ${this.level}`);
         } else {
             console.log('Этот герой не может танцевать танго на коне');
         }
     }
+
     // Метод увеличения ловкости героя у класса Knight
     gainAgility(Hero) {
         if (this.energy > gameParameters.MIN_STAT) {
@@ -66,19 +71,19 @@ class Knight extends Hero {
         }
     }
 }
-
 class Mage extends Hero {
     constructor(name, level, healthPoints, stats, hasTectonicPotion, mana) {
         super(name, level, healthPoints, stats);
         this.hasTectonicPotion = hasTectonicPotion;
         this.mana = mana;
+        super.danceAbility();
     }
     displayHero() {
         super.displayHero();
         console.log(`Мана ${this.mana}`)
-
         if (this.hasTectonicPotion === 'true' || this.hasTectonicPotion === true) {
             console.log('Есть зелье для тектоника!');
+            console.log(`${this.name} увеличивает параметр str на ${this.level}`);
         } else {
             console.log('Нет зелья для тектоника!');
         }
@@ -90,7 +95,7 @@ class Mage extends Hero {
             const healAmount = this.level * 10;
 
             Hero.healthPoints += healAmount;
-            console.log(this.name + " продлевает танец " + Hero.name + " на " + healAmount + " единиц.");
+            alert(this.name + " продлевает танец " + Hero.name + " на " + healAmount + " единиц.");
 
             // Трата маны пропорционально уровню героя
             this.mana -= healAmount * (10 / this.level) - this.level;
@@ -99,32 +104,3 @@ class Mage extends Hero {
         }
     }
 }
-
-let ASCIIsan = new Knight(
-    "Рыцарь Аски",
-    100,
-    100,
-    {
-        str: 100,
-        int: 30,
-        agi: 100
-    },
-    true,
-    100
-);
-
-let CSSchan = new Mage(
-    "Цэ-эс-эсочка",
-    100,
-    100,
-    {
-        str: 30,
-        int: 100,
-        agi: 100
-    },
-    true,
-    100
-);
-
-
-
