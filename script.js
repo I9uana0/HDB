@@ -50,12 +50,16 @@ function displayEnemyHero(hero) {
     hero.displayHero();
 }
 
+
+
+
 // Получаем информацию о герое игрока
 sendToBattleButton.onclick = () => {
     const heroName = document.getElementById("name").value;
+
     if (heroName !== "") {
         const heroClass = document.querySelector('input[name="class"]:checked').value;
-        const heroLevel = document.getElementById("level").value;
+        let heroLevel = document.getElementById("level").value;
         const heroStats = {};
         heroStats.str = Number(document.getElementById("strength").value);
         if (heroStats.str > gameParameters.MAX_STAT) {
@@ -65,11 +69,15 @@ sendToBattleButton.onclick = () => {
         if (heroStats.int > gameParameters.MAX_STAT) {
             heroStats.int = gameParameters.MAX_STAT
         }
-
         heroStats.agi = Number(document.getElementById("agility").value);
         if (heroStats.agi > gameParameters.MAX_STAT) {
             heroStats.agi = gameParameters.MAX_STAT
         }
+        if (heroLevel > gameParameters.MAX_LEVEL) {
+            heroLevel = gameParameters.MAX_LEVEL
+        }
+
+
         const additionalAbility = document.querySelector('input[name="additionalAbility"]:checked').value;
         const additionalStat = document.getElementById("additionalStat").value;
 
@@ -81,6 +89,18 @@ sendToBattleButton.onclick = () => {
             console.error("Упс! Произошла какая-то ошибка!")
             return;
         }
+
+        function danceAbility(hero) {
+            if (additionalAbility) {
+                let multiplier = Number(playerHero.level / 2);
+                hero.stats.str += multiplier;
+                if (heroStats.str > gameParameters.MAX_STAT) {
+                    heroStats.str = gameParameters.MAX_STAT
+                }
+
+            }
+        }
+        danceAbility(playerHero)
         displayPlayerHero(playerHero);
 
         getEnemyButton.removeAttribute('disabled');

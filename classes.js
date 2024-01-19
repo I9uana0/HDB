@@ -16,9 +16,6 @@ class Hero {
 
         console.log(heroInfo);
     }
-    danceAbility() {
-        this.stats.str += Number(this.level / 2);
-    }
 }
 
 class Knight extends Hero {
@@ -26,15 +23,15 @@ class Knight extends Hero {
         super(name, level, healthPoints, stats);
         this.isHorseTango = isHorseTango; // Может танцевать танго на коне
         this.energy = energy; // Показатель уровня энергии героя
-        super.danceAbility();
     }
 
     displayHero() {
         super.displayHero();
         console.log(`Энергия ${this.energy}`)
-        if (this.isHorseTango === 'true' || this.isHorseTango === true) {
+        if (this.isHorseTango) {
+            let multiplier = Number(this.level / 2)
             console.log('Этот герой может танцевать танго на коне');
-            console.log(`${this.name} увеличивает параметр str на ${this.level}`);
+            console.log(`${playerHero.name} увеличивает параметр str на ${multiplier}`);
         } else {
             console.log('Этот герой не может танцевать танго на коне');
         }
@@ -76,14 +73,14 @@ class Mage extends Hero {
         super(name, level, healthPoints, stats);
         this.hasTectonicPotion = hasTectonicPotion;
         this.mana = mana;
-        super.danceAbility();
     }
     displayHero() {
         super.displayHero();
         console.log(`Мана ${this.mana}`)
         if (this.hasTectonicPotion === 'true' || this.hasTectonicPotion === true) {
+            let multiplier = Number(this.level / 2)
             console.log('Есть зелье для тектоника!');
-            console.log(`${this.name} увеличивает параметр str на ${this.level}`);
+            console.log(`${playerHero.name} увеличивает параметр str на ${multiplier}`);
         } else {
             console.log('Нет зелья для тектоника!');
         }
@@ -98,7 +95,7 @@ class Mage extends Hero {
             alert(this.name + " продлевает танец " + Hero.name + " на " + healAmount + " единиц.");
 
             // Трата маны пропорционально уровню героя
-            this.mana -= healAmount * (10 / this.level) - this.level;
+            this.mana -= (healAmount * 10) / this.level - this.level;
         } else {
             alert("Недостаточно маны...");
         }
