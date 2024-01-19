@@ -31,7 +31,7 @@ class Knight extends Hero {
         if (this.isHorseTango) {
             let multiplier = Number(this.level / 2)
             console.log('Этот герой может танцевать танго на коне');
-            console.log(`${playerHero.name} увеличивает параметр str на ${multiplier}`);
+            console.log(`${playerHero.name} увеличивает параметр силы на ${multiplier}`);
         } else {
             console.log('Этот герой не может танцевать танго на коне');
         }
@@ -80,7 +80,7 @@ class Mage extends Hero {
         if (this.hasTectonicPotion === 'true' || this.hasTectonicPotion === true) {
             let multiplier = Number(this.level / 2)
             console.log('Есть зелье для тектоника!');
-            console.log(`${playerHero.name} увеличивает параметр str на ${multiplier}`);
+            console.log(`${playerHero.name} увеличивает параметр силы на ${multiplier}`);
         } else {
             console.log('Нет зелья для тектоника!');
         }
